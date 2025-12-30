@@ -29,6 +29,14 @@ from .jointed_box import (
     create_jointed_box_frame,
 )
 
+from .end_cap import (
+    EndCap,
+    EndCapSpec,
+    EndCapGenerator,
+    CapTabPosition,
+    generate_end_caps_for_frame,
+)
+
 __all__ = [
     # Specs
     "BoxSpecsData",
@@ -45,4 +53,10 @@ __all__ = [
     "JointedMember",
     "JointedBoxGenerator",
     "create_jointed_box_frame",
+    # End Caps
+    "EndCap",
+    "EndCapSpec",
+    "EndCapGenerator",
+    "CapTabPosition",
+    "generate_end_caps_for_frame",
 ]
