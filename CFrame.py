@@ -8,12 +8,12 @@ __license__ = "LGPL 3"
 # import FreeCAD modules
 import os
 
-import Quetzal_tooltips
+import SteelBox_tooltips
 import FreeCAD
 import FreeCADGui
 
 from pCmd import fCmd
-from quetzal_config import addCommand
+from steelbox_config import addCommand
 
 QT_TRANSLATE_NOOP = FreeCAD.Qt.QT_TRANSLATE_NOOP
 translate = FreeCAD.Qt.translate
@@ -44,10 +44,10 @@ class frameIt:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_FrameIt",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_FrameIt", "Place one-beam over one-edge"),
+            "Pixmap": "SteelBox_FrameIt",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_FrameIt", "Place one-beam over one-edge"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_FrameIt", Quetzal_tooltips.frameit_tooltip
+                "SteelBox_FrameIt", SteelBox_tooltips.frameit_tooltip
             ),
         }
 
@@ -76,10 +76,10 @@ class spinSect:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_SpinSection",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_SpinSection", "Spin beams by 45 deg."),
+            "Pixmap": "SteelBox_SpinSection",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_SpinSection", "Spin beams by 45 deg."),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_SpinSection", Quetzal_tooltips.spinsect_tooltip
+                "SteelBox_SpinSection", SteelBox_tooltips.spinsect_tooltip
             ),
         }
 
@@ -110,10 +110,10 @@ class reverseBeam:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_ReverseBeam",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_ReverseBeam", "Reverse orientation"),
+            "Pixmap": "SteelBox_ReverseBeam",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_ReverseBeam", "Reverse orientation"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_ReverseBeam", Quetzal_tooltips.reversebeam_tooltip
+                "SteelBox_ReverseBeam", SteelBox_tooltips.reversebeam_tooltip
             ),
         }
 
@@ -155,10 +155,10 @@ class alignFlange:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_AlignFlange",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_AlignFlange", "Align flange"),
+            "Pixmap": "SteelBox_AlignFlange",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_AlignFlange", "Align flange"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_AlignFlange",
+                "SteelBox_AlignFlange",
                 "Rotates the section of the beam to make the faces parallel to another face",
             ),
         }
@@ -196,10 +196,10 @@ class shiftBeam:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_ShiftBeam",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_ShiftBeam", "Shift the beam"),
+            "Pixmap": "SteelBox_ShiftBeam",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_ShiftBeam", "Shift the beam"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_ShiftBeam", Quetzal_tooltips.shiftbeam_tooltip
+                "SteelBox_ShiftBeam", SteelBox_tooltips.shiftbeam_tooltip
             ),
         }
 
@@ -245,11 +245,11 @@ class levelBeam:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_LevelBeam",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_LevelBeam", "Flush the surfaces"),
+            "Pixmap": "SteelBox_LevelBeam",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_LevelBeam", "Flush the surfaces"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_LevelBeam",
-                Quetzal_tooltips.levelbeam_tooltip,
+                "SteelBox_LevelBeam",
+                SteelBox_tooltips.levelbeam_tooltip,
             ),
         }
 
@@ -295,10 +295,10 @@ class alignEdge:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_AlignEdge",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_AlignEdge", "Mate the edges"),
+            "Pixmap": "SteelBox_AlignEdge",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_AlignEdge", "Mate the edges"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_AlignEdge", "Join two edges: select two or pre-select several"
+                "SteelBox_AlignEdge", "Join two edges: select two or pre-select several"
             ),
         }
 
@@ -325,10 +325,10 @@ class pivotBeam:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_PivotBeam",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_PivotBeam", "Pivot the beam"),
+            "Pixmap": "SteelBox_PivotBeam",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_PivotBeam", "Pivot the beam"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_PivotBeam", Quetzal_tooltips.pivotbeam_tooltip
+                "SteelBox_PivotBeam", SteelBox_tooltips.pivotbeam_tooltip
             ),
         }
 
@@ -359,10 +359,10 @@ class stretchBeam:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_StretchBeam",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_StretchBeam", "Stretch the beam"),
+            "Pixmap": "SteelBox_StretchBeam",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_StretchBeam", "Stretch the beam"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_StretchBeam",
+                "SteelBox_StretchBeam",
                 "Changes the length of the beam, either according a preselected edge or a direct input",
             ),
         }
@@ -389,10 +389,10 @@ class extend:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_ExtendBeam",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_ExtendBeam", "Extend the beam"),
+            "Pixmap": "SteelBox_ExtendBeam",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_ExtendBeam", "Extend the beam"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_ExtendBeam",
+                "SteelBox_ExtendBeam",
                 "Extend the beam either to a face, a vertex or the c.o.m. of the selected object",
             ),
         }
@@ -417,10 +417,10 @@ class adjustFrameAngle:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_AdjustFrameAngle",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_AdjustFrameAngle", "Adjust frame angle"),
+            "Pixmap": "SteelBox_AdjustFrameAngle",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_AdjustFrameAngle", "Adjust frame angle"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_AdjustFrameAngle", "Adjust the angle of frame by two edges"
+                "SteelBox_AdjustFrameAngle", "Adjust the angle of frame by two edges"
             ),
         }
 
@@ -450,10 +450,10 @@ class rotJoin:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_RotateJoin",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_RotateJoin", "Rotate join to edge"),
+            "Pixmap": "SteelBox_RotateJoin",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_RotateJoin", "Rotate join to edge"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_RotateJoin", "Rotates and align the beam according another edge"
+                "SteelBox_RotateJoin", "Rotates and align the beam according another edge"
             ),
         }
 
@@ -481,10 +481,10 @@ class insertPath:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertPath",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertPath", "Insert path"),
+            "Pixmap": "SteelBox_InsertPath",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertPath", "Insert path"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_InsertPath", "Creates one path along selected edges"
+                "SteelBox_InsertPath", "Creates one path along selected edges"
             ),
         }
 
@@ -550,9 +550,9 @@ class FrameBranchManager:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_FrameBranchManager",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_FrameBranchManager", "FrameBranch Manager"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_FrameBranchManager", Quetzal_tooltips.framebranchmanager_tooltip),
+            "Pixmap": "SteelBox_FrameBranchManager",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_FrameBranchManager", "FrameBranch Manager"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_FrameBranchManager", SteelBox_tooltips.framebranchmanager_tooltip),
         }
 
 
@@ -574,10 +574,10 @@ class insertSection:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertSection",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertSection", "Insert sections"),
+            "Pixmap": "SteelBox_InsertSection",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertSection", "Insert sections"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_InsertSection", "Creates customized beam profiles 2D"
+                "SteelBox_InsertSection", "Creates customized beam profiles 2D"
             ),
         }
 
@@ -585,20 +585,20 @@ class insertSection:
 # ---------------------------------------------------------------------------
 # Adds the commands to the FreeCAD command manager
 # ---------------------------------------------------------------------------
-addCommand("Quetzal_FrameIt", frameIt())
-addCommand("Quetzal_SpinSection", spinSect())
-addCommand("Quetzal_ReverseBeam", reverseBeam())
+addCommand("SteelBox_FrameIt", frameIt())
+addCommand("SteelBox_SpinSection", spinSect())
+addCommand("SteelBox_ReverseBeam", reverseBeam())
 # addCommand('fillFrame',fillFrame())
-addCommand("Quetzal_AlignFlange", alignFlange())
-addCommand("Quetzal_ShiftBeam", shiftBeam())
-addCommand("Quetzal_LevelBeam", levelBeam())
-addCommand("Quetzal_AlignEdge", alignEdge())
-addCommand("Quetzal_PivotBeam", pivotBeam())
-addCommand("Quetzal_StretchBeam", stretchBeam())
-addCommand("Quetzal_ExtendBeam", extend())
-addCommand("Quetzal_AdjustFrameAngle", adjustFrameAngle())
-addCommand("Quetzal_RotateJoin", rotJoin())
-addCommand("Quetzal_InsertPath", insertPath())
+addCommand("SteelBox_AlignFlange", alignFlange())
+addCommand("SteelBox_ShiftBeam", shiftBeam())
+addCommand("SteelBox_LevelBeam", levelBeam())
+addCommand("SteelBox_AlignEdge", alignEdge())
+addCommand("SteelBox_PivotBeam", pivotBeam())
+addCommand("SteelBox_StretchBeam", stretchBeam())
+addCommand("SteelBox_ExtendBeam", extend())
+addCommand("SteelBox_AdjustFrameAngle", adjustFrameAngle())
+addCommand("SteelBox_RotateJoin", rotJoin())
+addCommand("SteelBox_InsertPath", insertPath())
 # addCommand('FrameLineManager',FrameLineManager())
-addCommand("Quetzal_InsertSection", insertSection())
-addCommand("Quetzal_FrameBranchManager", FrameBranchManager())
+addCommand("SteelBox_InsertSection", insertSection())
+addCommand("SteelBox_FrameBranchManager", FrameBranchManager())

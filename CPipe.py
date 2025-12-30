@@ -8,9 +8,9 @@ __license__ = "LGPL 3"
 # import FreeCAD modules
 import FreeCAD
 import FreeCADGui
-import Quetzal_tooltips
+import SteelBox_tooltips
 
-from quetzal_config import addCommand
+from steelbox_config import addCommand
 
 QT_TRANSLATE_NOOP = FreeCAD.Qt.QT_TRANSLATE_NOOP
 # translate = FreeCAD.Qt.translate
@@ -48,9 +48,9 @@ class insertPipe:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertPipe",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertPipe", "Insert a tube"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_InsertPipe",  Quetzal_tooltips.insert_tube_tooltip),
+            "Pixmap": "SteelBox_InsertPipe",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertPipe", "Insert a tube"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_InsertPipe",  SteelBox_tooltips.insert_tube_tooltip),
         }
 
 
@@ -68,9 +68,9 @@ class insertElbow:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertElbow",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertElbow", "Insert a elbow"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_InsertElbow", Quetzal_tooltips.elbow_tooltip),
+            "Pixmap": "SteelBox_InsertElbow",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertElbow", "Insert a elbow"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_InsertElbow", SteelBox_tooltips.elbow_tooltip),
         }
 
 
@@ -91,9 +91,9 @@ class insertTerminalAdapter:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_TerminalAdapter",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertTerminalAdapter", "Insert Terminal adapter"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_InsertTerminalAdapter", "Insert Terminal adapter"),
+            "Pixmap": "SteelBox_TerminalAdapter",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertTerminalAdapter", "Insert Terminal adapter"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_InsertTerminalAdapter", "Insert Terminal adapter"),
         }
 
 
@@ -111,9 +111,9 @@ class insertReduct:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertReduct",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertReduct", "Insert a reduction"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_InsertReduct", "Insert a reduction"),
+            "Pixmap": "SteelBox_InsertReduct",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertReduct", "Insert a reduction"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_InsertReduct", "Insert a reduction"),
         }
 
 
@@ -131,9 +131,9 @@ class insertCap:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertCap",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertCap", "Insert a cap"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_InsertCap", "Insert a cap"),
+            "Pixmap": "SteelBox_InsertCap",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertCap", "Insert a cap"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_InsertCap", "Insert a cap"),
         }
 
 
@@ -151,9 +151,9 @@ class insertFlange:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertFlange",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertFlange", "Insert a flange"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_InsertFlange", "Insert a flange"),
+            "Pixmap": "SteelBox_InsertFlange",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertFlange", "Insert a flange"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_InsertFlange", "Insert a flange"),
         }
 
 
@@ -171,9 +171,9 @@ class insertUbolt:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertUBolt",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertUbolt", "Insert a U-bolt"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_InsertUbolt", "Insert a U-bolt"),
+            "Pixmap": "SteelBox_InsertUBolt",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertUbolt", "Insert a U-bolt"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_InsertUbolt", "Insert a U-bolt"),
         }
 
 
@@ -191,9 +191,9 @@ class insertPypeLine:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertPypeLine",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertPypeLine", "PypeLine Manager"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_InsertPypeLine", "Open PypeLine Manager"),
+            "Pixmap": "SteelBox_InsertPypeLine",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertPypeLine", "PypeLine Manager"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_InsertPypeLine", "Open PypeLine Manager"),
         }
 
 
@@ -212,9 +212,9 @@ class insertBranch:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertBranch",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertBranch", "Insert a branch"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_InsertBranch", "Insert a PypeBranch"),
+            "Pixmap": "SteelBox_InsertBranch",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertBranch", "Insert a branch"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_InsertBranch", "Insert a PypeBranch"),
         }
 
 
@@ -232,10 +232,10 @@ class breakPipe:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_BreakPipe",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_BreakPipe", "Break the pipe"),
+            "Pixmap": "SteelBox_BreakPipe",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_BreakPipe", "Break the pipe"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_BreakPipe", "Break one pipe at point and insert gap"
+                "SteelBox_BreakPipe", "Break one pipe at point and insert gap"
             ),
         }
 
@@ -259,10 +259,10 @@ class mateEdges:
     def GetResources(self):
         return {
             "Accel": "M,E",
-            "Pixmap": "Quetzal_MateEdges",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_MateEdges", "Mate pipes edges"),
+            "Pixmap": "SteelBox_MateEdges",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_MateEdges", "Mate pipes edges"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_MateEdges", "Mate two terminations through their edges"
+                "SteelBox_MateEdges", "Mate two terminations through their edges"
             ),
         }
 
@@ -282,10 +282,10 @@ class flat:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_Flat",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_Flat", "Fit one elbow"),
+            "Pixmap": "SteelBox_Flat",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_Flat", "Fit one elbow"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_Flat", "Place a existing elbow between two pipes adjusting lenght pipes"
+                "SteelBox_Flat", "Place a existing elbow between two pipes adjusting lenght pipes"
             ),
         }
 
@@ -308,12 +308,12 @@ class extend2intersection:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_ExtendIntersection2",
+            "Pixmap": "SteelBox_ExtendIntersection2",
             "MenuText": QT_TRANSLATE_NOOP(
-                "Quetzal_ExtendIntersection2", "Extend pipes to intersection"
+                "SteelBox_ExtendIntersection2", "Extend pipes to intersection"
             ),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_ExtendIntersection2", "Extends pipes to intersection"
+                "SteelBox_ExtendIntersection2", "Extends pipes to intersection"
             ),
         }
 
@@ -336,12 +336,12 @@ class extend1intersection:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_ExtendIntersection1",
+            "Pixmap": "SteelBox_ExtendIntersection1",
             "MenuText": QT_TRANSLATE_NOOP(
-                "Quetzal_ExtendIntersection1", "Extend pipe to intersection"
+                "SteelBox_ExtendIntersection1", "Extend pipe to intersection"
             ),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_ExtendIntersection1", "Extends pipe to intersection"
+                "SteelBox_ExtendIntersection1", "Extends pipe to intersection"
             ),
         }
 
@@ -370,10 +370,10 @@ class laydown:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_Laydown",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_Laydown", "Lay-down the pipe"),
+            "Pixmap": "SteelBox_Laydown",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_Laydown", "Lay-down the pipe"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_Laydown", "Lay-down the pipe on the support plane"
+                "SteelBox_Laydown", "Lay-down the pipe on the support plane"
             ),
         }
 
@@ -408,9 +408,9 @@ class raiseup:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_Raiseup",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_Raiseup", "Raise-up the support"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_Raiseup", "Raise the support to the pipe"),
+            "Pixmap": "SteelBox_Raiseup",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_Raiseup", "Raise-up the support"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_Raiseup", "Raise the support to the pipe"),
         }
 
 
@@ -432,9 +432,9 @@ class joinPype:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_JoinPype",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_JoinPype", "Join pipes"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_JoinPype", "Select the part-pype and the port"),
+            "Pixmap": "SteelBox_JoinPype",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_JoinPype", "Join pipes"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_JoinPype", "Select the part-pype and the port"),
         }
 
 
@@ -454,9 +454,9 @@ class insertValve:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertValve",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertValve", "Insert a valve"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_InsertValve", "Insert a valve"),
+            "Pixmap": "SteelBox_InsertValve",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertValve", "Insert a valve"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_InsertValve", "Insert a valve"),
         }
 
 
@@ -478,10 +478,10 @@ class attach2tube:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_Attach2Tube",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_Attach2Tube", "Attach to tube"),
+            "Pixmap": "SteelBox_Attach2Tube",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_Attach2Tube", "Attach to tube"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_Attach2Tube", "Attach one pype to the nearest port of selected pipe"
+                "SteelBox_Attach2Tube", "Attach one pype to the nearest port of selected pipe"
             ),
         }
 
@@ -502,10 +502,10 @@ class point2point:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_Point2Point",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_Point2Point", "Draw a tube point by point"),
+            "Pixmap": "SteelBox_Point2Point",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_Point2Point", "Draw a tube point by point"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_Point2Point", "A new body is created on each click on subsequent points"
+                "SteelBox_Point2Point", "A new body is created on each click on subsequent points"
             ),
         }
 
@@ -529,9 +529,9 @@ class insertAnyz:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertAnyShape",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertAnyShape", "Insert any shape"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_InsertAnyShape", "Insert a STEP, IGES or BREP"),
+            "Pixmap": "SteelBox_InsertAnyShape",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertAnyShape", "Insert any shape"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_InsertAnyShape", "Insert a STEP, IGES or BREP"),
         }
 
 
@@ -551,9 +551,9 @@ class insertTank:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertTank",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertTank", "Insert a tank"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_InsertTank", "Create tank and nozzles"),
+            "Pixmap": "SteelBox_InsertTank",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertTank", "Insert a tank"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_InsertTank", "Create tank and nozzles"),
         }
 
 
@@ -573,10 +573,10 @@ class insertRoute:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertRoute",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_InsertRoute", "Insert a pipe route"),
+            "Pixmap": "SteelBox_InsertRoute",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_InsertRoute", "Insert a pipe route"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_InsertRoute", "Create a sketch attached to a circular edge"
+                "SteelBox_InsertRoute", "Create a sketch attached to a circular edge"
             ),
         }
 
@@ -599,10 +599,10 @@ class makeHeader:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_MakeHeader",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_MakeHeader", "Connect to header"),
+            "Pixmap": "SteelBox_MakeHeader",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_MakeHeader", "Connect to header"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_MakeHeader",
+                "SteelBox_MakeHeader",
                 "Connect branches to one header pipe\nBranches and header's axes must be ortho",
             ),
         }
@@ -611,30 +611,30 @@ class makeHeader:
 # ---------------------------------------------------------------------------
 # Adds the commands to the FreeCAD command manager
 # ---------------------------------------------------------------------------
-addCommand("Quetzal_InsertPipe", insertPipe())
-addCommand("Quetzal_InsertElbow", insertElbow())
-addCommand("Quetzal_InsertReduct", insertReduct())
-addCommand("Quetzal_InsertCap", insertCap())
-addCommand("Quetzal_InsertValve", insertValve())
-addCommand("Quetzal_InsertFlange", insertFlange())
-addCommand("Quetzal_InsertUBolt", insertUbolt())
-addCommand("Quetzal_InsertPypeLine", insertPypeLine())
-addCommand("Quetzal_InsertBranch", insertBranch())
-addCommand("Quetzal_InsertTank", insertTank())
-addCommand("Quetzal_InsertRoute", insertRoute())
-addCommand("Quetzal_BreakPipe", breakPipe())
-addCommand("Quetzal_MateEdges", mateEdges())
-addCommand("Quetzal_JoinPype", joinPype())
-addCommand("Quetzal_Attach2Tube", attach2tube())
-addCommand("Quetzal_Flat", flat())
-addCommand("Quetzal_ExtendIntersection2", extend2intersection())
-addCommand("Quetzal_ExtendIntersection1", extend1intersection())
-addCommand("Quetzal_Laydown", laydown())
-addCommand("Quetzal_Raiseup", raiseup())
-addCommand("Quetzal_Point2Point", point2point())
-addCommand("Quetzal_InsertAnyShape", insertAnyz())
-addCommand("Quetzal_MakeHeader", makeHeader())
-addCommand("Quetzal_InsertTerminalAdapter", insertTerminalAdapter())
+addCommand("SteelBox_InsertPipe", insertPipe())
+addCommand("SteelBox_InsertElbow", insertElbow())
+addCommand("SteelBox_InsertReduct", insertReduct())
+addCommand("SteelBox_InsertCap", insertCap())
+addCommand("SteelBox_InsertValve", insertValve())
+addCommand("SteelBox_InsertFlange", insertFlange())
+addCommand("SteelBox_InsertUBolt", insertUbolt())
+addCommand("SteelBox_InsertPypeLine", insertPypeLine())
+addCommand("SteelBox_InsertBranch", insertBranch())
+addCommand("SteelBox_InsertTank", insertTank())
+addCommand("SteelBox_InsertRoute", insertRoute())
+addCommand("SteelBox_BreakPipe", breakPipe())
+addCommand("SteelBox_MateEdges", mateEdges())
+addCommand("SteelBox_JoinPype", joinPype())
+addCommand("SteelBox_Attach2Tube", attach2tube())
+addCommand("SteelBox_Flat", flat())
+addCommand("SteelBox_ExtendIntersection2", extend2intersection())
+addCommand("SteelBox_ExtendIntersection1", extend1intersection())
+addCommand("SteelBox_Laydown", laydown())
+addCommand("SteelBox_Raiseup", raiseup())
+addCommand("SteelBox_Point2Point", point2point())
+addCommand("SteelBox_InsertAnyShape", insertAnyz())
+addCommand("SteelBox_MakeHeader", makeHeader())
+addCommand("SteelBox_InsertTerminalAdapter", insertTerminalAdapter())
 
 
 ### QkMenus ###
@@ -654,12 +654,12 @@ class pipeQM:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertPipe",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_PipeQM", "QM for pipes"),
+            "Pixmap": "SteelBox_InsertPipe",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_PipeQM", "QM for pipes"),
         }
 
 
-addCommand("Quetzal_PipeQM", pipeQM())
+addCommand("SteelBox_PipeQM", pipeQM())
 
 
 # Quick Menu section
@@ -680,12 +680,12 @@ class elbowQM:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertElbow",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_ElbowQM", "QM for elbows"),
+            "Pixmap": "SteelBox_InsertElbow",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_ElbowQM", "QM for elbows"),
         }
 
 
-addCommand("Quetzal_ElbowQM", elbowQM())
+addCommand("SteelBox_ElbowQM", elbowQM())
 
 
 class flangeQM:
@@ -703,12 +703,12 @@ class flangeQM:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertFlange",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_FlangeQM", "QM for flanges"),
+            "Pixmap": "SteelBox_InsertFlange",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_FlangeQM", "QM for flanges"),
         }
 
 
-addCommand("Quetzal_FlangeQM", flangeQM())
+addCommand("SteelBox_FlangeQM", flangeQM())
 
 
 class valveQM:
@@ -726,12 +726,12 @@ class valveQM:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertValve",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_ValveQM", "QM for valves"),
+            "Pixmap": "SteelBox_InsertValve",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_ValveQM", "QM for valves"),
         }
 
 
-addCommand("Quetzal_ValveQM", valveQM())
+addCommand("SteelBox_ValveQM", valveQM())
 
 
 class capQM:
@@ -749,9 +749,9 @@ class capQM:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_InsertCap",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_CapQM", "QM for caps"),
+            "Pixmap": "SteelBox_InsertCap",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_CapQM", "QM for caps"),
         }
 
 
-addCommand("Quetzal_CapQM", capQM())
+addCommand("SteelBox_CapQM", capQM())

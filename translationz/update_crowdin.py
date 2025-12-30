@@ -82,13 +82,13 @@ from urllib.parse import quote_plus
 from urllib.request import Request, urlopen, urlretrieve
 
 TsFile = namedtuple("TsFile", ["filename", "src_path"])
-translation_source = [TsFile("Quetzal.ts", "Quetzal.ts")]
+translation_source = [TsFile("SteelBox.ts", "SteelBox.ts")]
 
 # NOTE: location tuple contains:
 # - module name
 # - relative path to translation folder
 WBLocation = namedtuple("WBLocation", ["module_name", "translations_path"])
-wb_location = WBLocation("Quetzal", ".")
+wb_location = WBLocation("SteelBox", ".")
 
 supported_locales = {
     "af": "af-ZA",
@@ -423,7 +423,7 @@ if __name__ == "__main__":
         exit(69)
         locale_source = []
         for arg in args[1:]:
-            locale_source.append(TsFile(f"Quetzal_{arg}.ts", f"Quetzal_{arg}.ts"))
+            locale_source.append(TsFile(f"SteelBox_{arg}.ts", f"SteelBox_{arg}.ts"))
             updater.update_translation(locale_source)
 
         print(locale_source)

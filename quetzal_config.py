@@ -36,4 +36,4 @@ def addCommand(name, cmdObject):
     for i in range(len(list) - 1):
         source += list[i + 1][pos:]
     FreeCADGui.addCommand(name, cmdObject, source)
-    # FreeCAD.Console.PrintMessage("Quetzal " + name + "source: <<< " + source + " >>>\n")
+    # FreeCAD.Console.PrintMessage("SteelBox " + name + "source: <<< " + source + " >>>\n")

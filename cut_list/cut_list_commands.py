@@ -16,11 +16,11 @@ class cutListCommand:
 
     def GetResources(self):
         return {
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_CreateCutList", "createCutList"),
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_CreateCutList", "createCutList"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_CreateCutList", "Create a new Cut List from Quetzal Beams"
+                "SteelBox_CreateCutList", "Create a new Cut List from SteelBox Beams"
             ),
-            "Pixmap": "Quetzal_CreateCutList",
+            "Pixmap": "SteelBox_CreateCutList",
         }
 
     def Activated(self):
@@ -31,4 +31,4 @@ class cutListCommand:
         return FreeCAD.ActiveDocument is not None
 
 
-FreeCADGui.addCommand("Quetzal_CreateCutList", cutListCommand())
+FreeCADGui.addCommand("SteelBox_CreateCutList", cutListCommand())

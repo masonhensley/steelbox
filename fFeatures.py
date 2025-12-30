@@ -33,13 +33,13 @@ from PySide.QtWidgets import (
 
 import fCmd
 import pCmd
-from quetzal_config import FREECADVERSION, get_icon_path
+from steelbox_config import FREECADVERSION, get_icon_path
 from uCmd import label3D
 import ShpstData
 
 translate = FreeCAD.Qt.translate
 QT_TRANSLATE_NOOP = FreeCAD.Qt.QT_TRANSLATE_NOOP
-settings = QSettings("quetzal","fFeatures")
+settings = QSettings("steelbox","fFeatures")
 
 ################ FUNCTIONS ###########################
 
@@ -474,8 +474,8 @@ class frameBranchForm(dodoDialogs.protoTypeDialog):
         self.form.editTail.setValidator(QDoubleValidator())
         self.form.editTail.editingFinished.connect(self.changeTailOffset)
         self.form.editLength.setValidator(QDoubleValidator())
-        QuetzalRatings = self.fillRatings()
-        self.form.Rate_comboBox.addItems(QuetzalRatings)
+        SteelBoxRatings = self.fillRatings()
+        self.form.Rate_comboBox.addItems(SteelBoxRatings)
         self.form.Rate_comboBox.setCurrentText(settings.value("LastRateApplied"))
         self.form.Rate_comboBox.addItems(["<by sketch>"])
         self.form.Rate_comboBox.currentIndexChanged.connect(self.fillSizes)
@@ -501,7 +501,7 @@ class frameBranchForm(dodoDialogs.protoTypeDialog):
         self.actionX.triggered.connect(self.trim)  # reconnect to trim()
 
     def on_currentIndexChanged(self) -> None:
-        profilepath = FreeCAD.getUserAppDataDir() + "Mod/quetzal/iconz/PreviewSections/"
+        profilepath = FreeCAD.getUserAppDataDir() + "Mod/steelbox/iconz/PreviewSections/"
         lastsizeselected=self.form.Sizes_comboBox.currentText()
         fullimagepath = profilepath+str(lastsizeselected)+".png"
         # FreeCAD.Console.PrintMessage(fullimagepath+"\r\n")
@@ -906,13 +906,13 @@ class frameBranchForm(dodoDialogs.protoTypeDialog):
         """
         tablez = listdir(join(dirname(abspath(__file__)), "tablez"))
         files = [name for name in tablez if name.startswith("Section")]
-        QuetzalRatings = [s.lstrip("Section_").rstrip(".csv") for s in files]
+        SteelBoxRatings = [s.lstrip("Section_").rstrip(".csv") for s in files]
         self.BIM_PropList = ArchProfile.readPresets()
         "Avoid to add dublicated ratings names in widget"
         for rating in self.BIM_PropList:
-            if rating[1] not in QuetzalRatings:
-                QuetzalRatings.append(rating[1])
-        return QuetzalRatings
+            if rating[1] not in SteelBoxRatings:
+                SteelBoxRatings.append(rating[1])
+        return SteelBoxRatings
 
     def fillSizes(self):
         """
@@ -946,9 +946,9 @@ class frameBranchForm(dodoDialogs.protoTypeDialog):
             "Add BIM list to listSizes"
             self.form.Sizes_comboBox.addItems(temp_sizelist)
             self.form.Sizes_comboBox.setCurrentText(settings.value("LastSizeApplied"))
-            "Retrieved profiles sizes from quetzal tablez"
+            "Retrieved profiles sizes from steelbox tablez"
             # "Create file name based on rating selection"
-            # "Open quetzal CSV file based on rating selection"
+            # "Open steelbox CSV file based on rating selection"
             fileName = "Section_" + self.SType + ".csv"
             filepath = join(dirname(abspath(__file__)), "tablez", fileName)
             if isfile(filepath):
@@ -1350,7 +1350,7 @@ class ViewProviderFrameBranch:
             return True
 
     def getIcon(self):
-        return get_icon_path("Quetzal_FrameBranchManager")
+        return get_icon_path("SteelBox_FrameBranchManager")
 
     def attach(self, vobj):
         self.ViewObject = vobj

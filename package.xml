@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
 
-  <name>Quetzal</name>
+  <name>SteelBox</name>
 
-  <description>A set of commands and objects that help to speed-up the drawing of frames and pipelines. Dodo successor.</description>
+  <description>A set of commands and objects that help to speed-up the drawing of DFM steel tube cabinet boxes. Forked from Quetzal and Dodo.</description>
 
   <version>1.7.8</version>
 
-  <date>2025-01-15</date>
+  <date>2025-12-29</date>
 
-  <maintainer email="tgo.edrobles@gmail.com">Edgar J Robles</maintainer>
+  <maintainer email="masonhensley+steelbox@gmail.com">Mason Hensley</maintainer>
 
   <license file="LICENSE">LGPL-3.0-or-later</license>
 
   <pythonmin>3.7.0</pythonmin>
 
-  <url branch="master" type="repository">https://github.com/EdgarJRobles/quetzal</url>
+  <url branch="master" type="repository">https://github.com/masonhensley/steelbox</url>
 
-  <url type="bugtracker">https://github.com/EdgarJRobles/quetzal/issues</url>
+  <url type="bugtracker">https://github.com/masonhensley/steelbox/issues</url>
 
-  <url type="readme">https://github.com/EdgarJRobles/quetzal/blob/master/README.md</url>
+  <url type="readme">https://github.com/masonhensley/steelbox/blob/master/README.md</url>
 
-  <url type="documentation">https://wiki.freecad.org/Quetzal_Workbench</url>
+  <url type="documentation">https://wiki.freecad.org/SteelBox_Workbench</url>
 
-  <url type="discussion">https://forum.freecad.org/viewtopic.php?t=22711</url>
+  <!-- <url type="discussion">https://forum.freecad.org/viewtopic.php?t=22711</url> -->
 
   <author>microelly</author>
   <author>looo</author>
   <author>triplus</author>
   <author>Riccardo Treu (oddtopus)</author>
   <author>Edgar Robles</author>
+  <author>Mason Hensley</author>
 
-  <icon>iconz/quetzal.svg</icon>
+  <icon>iconz/steelbox.svg</icon>
 
   <content>
     <workbench>
@@ -39,10 +40,10 @@
       <depend>Draft</depend>
       <tag>beams</tag>
       <tag>frames</tag>
-      <tag>pipe</tag>
-      <tag>pipelines</tag>
-      <icon>iconz/quetzal.svg</icon>
-      <classname>QuetzalWorkbench</classname>
+      <tag>tube</tag>
+      <tag>cabinets</tag>
+      <icon>iconz/steelbox.svg</icon>
+      <classname>SteelBoxWorkbench</classname>
       <subdirectory>./</subdirectory>
     </workbench>
   </content>

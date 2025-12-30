@@ -7,7 +7,7 @@ __license__ = "LGPL 3"
 import FreeCAD
 import FreeCADGui
 
-from quetzal_config import addCommand
+from steelbox_config import addCommand
 
 QT_TRANSLATE_NOOP = FreeCAD.Qt.QT_TRANSLATE_NOOP
 
@@ -31,10 +31,10 @@ class queryModel:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_QueryModel",
+            "Pixmap": "SteelBox_QueryModel",
             "Accel": "Q,M",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_QueryModel", "Query the model"),
-            "ToolTip": QT_TRANSLATE_NOOP("Quetzal_QueryModel", "Click objects to print infos"),
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_QueryModel", "Query the model"),
+            "ToolTip": QT_TRANSLATE_NOOP("SteelBox_QueryModel", "Click objects to print infos"),
         }
 
 
@@ -64,11 +64,11 @@ class moveWorkPlane:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_MoveWorkPlane",
+            "Pixmap": "SteelBox_MoveWorkPlane",
             "Accel": "A,W",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_MoveWorkPlane", "Align workplane"),
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_MoveWorkPlane", "Align workplane"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_MoveWorkPlane",
+                "SteelBox_MoveWorkPlane",
                 "Moves and rotates the drafting workplane with points, edges and faces",
             ),
         }
@@ -90,10 +90,10 @@ class rotateWorkPlane:
     def GetResources(self):
         return {
             "Accel": "R,W",
-            "Pixmap": "Quetzal_RotateWorkPlane",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_RotateWorkPlane", "Rotate workplane"),
+            "Pixmap": "SteelBox_RotateWorkPlane",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_RotateWorkPlane", "Rotate workplane"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_RotateWorkPlane", "Spin the Draft working plane about one of its axes"
+                "SteelBox_RotateWorkPlane", "Spin the Draft working plane about one of its axes"
             ),
         }
 
@@ -119,8 +119,8 @@ class offsetWorkPlane:
 
             offset = qid.getInt(
                 None,
-                translate("Quetzal_OffsetWorkPlane", "Offset Work Plane"),
-                translate("Quetzal_OffsetWorkPlane", "Offset: "),
+                translate("SteelBox_OffsetWorkPlane", "Offset Work Plane"),
+                translate("SteelBox_OffsetWorkPlane", "Offset: "),
             )
             if offset[1] > 0:
                 uCmd.offsetWP(offset[0])
@@ -129,11 +129,11 @@ class offsetWorkPlane:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_OffsetWorkPlane",
+            "Pixmap": "SteelBox_OffsetWorkPlane",
             "Accel": "O,W",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_OffsetWorkPlane", "Offset workplane"),
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_OffsetWorkPlane", "Offset workplane"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_OffsetWorkPlane", "Shifts the WP along its normal."
+                "SteelBox_OffsetWorkPlane", "Shifts the WP along its normal."
             ),
         }
 
@@ -153,11 +153,11 @@ class hackedL:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_HackedLine",
+            "Pixmap": "SteelBox_HackedLine",
             "Accel": "H,L",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_HackedLine", "Draw a Draft wire"),
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_HackedLine", "Draw a Draft wire"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_HackedLine",
+                "SteelBox_HackedLine",
                 "WP is re-positioned at each point. Possible to spin and offset it.",
             ),
         }
@@ -179,11 +179,11 @@ class moveHandle:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_MoveHandle",
+            "Pixmap": "SteelBox_MoveHandle",
             "Accel": "M,H",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_MoveHandle", "Move objects"),
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_MoveHandle", "Move objects"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_MoveHandle", "Move quickly objects inside viewport"
+                "SteelBox_MoveHandle", "Move quickly objects inside viewport"
             ),
         }
 
@@ -203,12 +203,12 @@ class dpCalc:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_PressureLossCalculator",
+            "Pixmap": "SteelBox_PressureLossCalculator",
             "MenuText": QT_TRANSLATE_NOOP(
-                "Quetzal_PressureLossCalculator", "Pressure loss calculator"
+                "SteelBox_PressureLossCalculator", "Pressure loss calculator"
             ),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_PressureLossCalculator",
+                "SteelBox_PressureLossCalculator",
                 "Calculate pressure loss in 'pypes' using ChEDL libraries.\n"
                 "See __doc__ of the module for further information.",
             ),
@@ -234,10 +234,10 @@ class selectSolids:
 
     def GetResources(self):
         return {
-            "Pixmap": "Quetzal_SelectSolids",
-            "MenuText": QT_TRANSLATE_NOOP("Quetzal_SelectSolids", "Select solids"),
+            "Pixmap": "SteelBox_SelectSolids",
+            "MenuText": QT_TRANSLATE_NOOP("SteelBox_SelectSolids", "Select solids"),
             "ToolTip": QT_TRANSLATE_NOOP(
-                "Quetzal_SelectSolids",
+                "SteelBox_SelectSolids",
                 "Grab all solids or those partially selected\n to export in .step format",
             ),
         }
@@ -246,11 +246,11 @@ class selectSolids:
 # ---------------------------------------------------------------------------
 # Adds the commands to the FreeCAD command manager
 # ---------------------------------------------------------------------------
-addCommand("Quetzal_QueryModel", queryModel())
-addCommand("Quetzal_MoveWorkPlane", moveWorkPlane())
-addCommand("Quetzal_RotateWorkPlane", rotateWorkPlane())
-addCommand("Quetzal_OffsetWorkPlane", offsetWorkPlane())
-addCommand("Quetzal_HackedLine", hackedL())
-addCommand("Quetzal_MoveHandle", moveHandle())
-addCommand("Quetzal_PressureLossCalculator", dpCalc())
-addCommand("Quetzal_SelectSolids", selectSolids())
+addCommand("SteelBox_QueryModel", queryModel())
+addCommand("SteelBox_MoveWorkPlane", moveWorkPlane())
+addCommand("SteelBox_RotateWorkPlane", rotateWorkPlane())
+addCommand("SteelBox_OffsetWorkPlane", offsetWorkPlane())
+addCommand("SteelBox_HackedLine", hackedL())
+addCommand("SteelBox_MoveHandle", moveHandle())
+addCommand("SteelBox_PressureLossCalculator", dpCalc())
+addCommand("SteelBox_SelectSolids", selectSolids())

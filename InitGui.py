@@ -12,21 +12,21 @@ Log = FreeCAD.Console.PrintLog
 Msg = FreeCAD.Console.PrintMessage
 
 
-class QuetzalWorkbench(Workbench):
+class SteelBoxWorkbench(Workbench):
     def __init__(self):
-        from quetzal_config import TRANSLATIONSPATH, ICONPATH
+        from steelbox_config import TRANSLATIONSPATH, ICONPATH
 
         # Add translations path
         FreeCADGui.addLanguagePath(TRANSLATIONSPATH)
         FreeCADGui.updateLocale()
 
-        self.__class__.MenuText = FreeCAD.Qt.translate("Workbench", "Quetzal")
+        self.__class__.MenuText = FreeCAD.Qt.translate("Workbench", "SteelBox")
         self.__class__.ToolTip = FreeCAD.Qt.translate(
             "Workbench",
-            "Quetzal is the fork of Dodo workbench for FreeCAD. "
+            "SteelBox is the fork of Dodo workbench for FreeCAD. "
             "Extending Dodo workbench support and adding translation support. ",
         )
-        self.__class__.Icon = os.path.join(ICONPATH, "quetzal.svg")
+        self.__class__.Icon = os.path.join(ICONPATH, "steelbox.svg")
         FreeCADGui.addIconPath(ICONPATH)
 
     try:
@@ -40,7 +40,7 @@ class QuetzalWorkbench(Workbench):
     v = sys.version_info[0]
     if v < 3:
         FreeCAD.Console.PrintWarning(
-            "Quetzal is written for Py3 and Qt5\n You may experience mis-behaviuors\n"
+            "SteelBox is written for Py3 and Qt5\n You may experience mis-behaviuors\n"
         )
 
     def Initialize(self):
@@ -52,14 +52,14 @@ class QuetzalWorkbench(Workbench):
         import CUtils  # noqa: F401
 
         self.utilsList = [
-            "Quetzal_SelectSolids",
-            "Quetzal_QueryModel",
-            "Quetzal_MoveWorkPlane",
-            "Quetzal_OffsetWorkPlane",
-            "Quetzal_RotateWorkPlane",
-            "Quetzal_HackedLine",
-            "Quetzal_MoveHandle",
-            "Quetzal_PressureLossCalculator",
+            "SteelBox_SelectSolids",
+            "SteelBox_QueryModel",
+            "SteelBox_MoveWorkPlane",
+            "SteelBox_OffsetWorkPlane",
+            "SteelBox_RotateWorkPlane",
+            "SteelBox_HackedLine",
+            "SteelBox_MoveHandle",
+            "SteelBox_PressureLossCalculator",
         ]
         self.appendToolbar(QT_TRANSLATE_NOOP("Workbench", "Utils"), self.utilsList)
         Log("Loading Utils: done\n")
@@ -68,22 +68,22 @@ class QuetzalWorkbench(Workbench):
         from cut_list.cut_list_commands import cutListCommand  # noqa: F401
 
         self.frameList = [
-            "Quetzal_FrameIt",
-            "Quetzal_FrameBranchManager",
-            "Quetzal_InsertSection",
-            "Quetzal_SpinSection",
-            "Quetzal_ReverseBeam",
-            "Quetzal_ShiftBeam",
-            "Quetzal_PivotBeam",
-            "Quetzal_LevelBeam",
-            "Quetzal_AlignEdge",
-            "Quetzal_RotateJoin",
-            "Quetzal_AlignFlange",
-            "Quetzal_StretchBeam",
-            "Quetzal_ExtendBeam",
-            "Quetzal_AdjustFrameAngle",
-            "Quetzal_InsertPath",
-            "Quetzal_CreateCutList",
+            "SteelBox_FrameIt",
+            "SteelBox_FrameBranchManager",
+            "SteelBox_InsertSection",
+            "SteelBox_SpinSection",
+            "SteelBox_ReverseBeam",
+            "SteelBox_ShiftBeam",
+            "SteelBox_PivotBeam",
+            "SteelBox_LevelBeam",
+            "SteelBox_AlignEdge",
+            "SteelBox_RotateJoin",
+            "SteelBox_AlignFlange",
+            "SteelBox_StretchBeam",
+            "SteelBox_ExtendBeam",
+            "SteelBox_AdjustFrameAngle",
+            "SteelBox_InsertPath",
+            "SteelBox_CreateCutList",
         ]
         self.appendToolbar(QT_TRANSLATE_NOOP("Workbench", "Frame tools"), self.frameList)
         Log("Loading Frame tools: done\n")
@@ -91,29 +91,29 @@ class QuetzalWorkbench(Workbench):
         import CPipe  # noqa: F401
 
         self.pypeList = [
-            "Quetzal_InsertPipe",
-            "Quetzal_InsertElbow",
-            "Quetzal_InsertTerminalAdapter",
-            "Quetzal_InsertReduct",
-            "Quetzal_InsertCap",
-            "Quetzal_InsertValve",
-            "Quetzal_InsertFlange",
-            "Quetzal_InsertUBolt",
-            "Quetzal_InsertPypeLine",
-            "Quetzal_InsertBranch",
-            "Quetzal_InsertTank",
-            "Quetzal_InsertRoute",
-            "Quetzal_BreakPipe",
-            "Quetzal_MateEdges",
-            "Quetzal_Flat",
-            "Quetzal_ExtendIntersection2",
-            "Quetzal_ExtendIntersection1",
-            "Quetzal_MakeHeader",
-            "Quetzal_Laydown",
-            "Quetzal_Raiseup",
-            "Quetzal_Attach2Tube",
-            "Quetzal_Point2Point",
-            "Quetzal_InsertAnyShape",
+            "SteelBox_InsertPipe",
+            "SteelBox_InsertElbow",
+            "SteelBox_InsertTerminalAdapter",
+            "SteelBox_InsertReduct",
+            "SteelBox_InsertCap",
+            "SteelBox_InsertValve",
+            "SteelBox_InsertFlange",
+            "SteelBox_InsertUBolt",
+            "SteelBox_InsertPypeLine",
+            "SteelBox_InsertBranch",
+            "SteelBox_InsertTank",
+            "SteelBox_InsertRoute",
+            "SteelBox_BreakPipe",
+            "SteelBox_MateEdges",
+            "SteelBox_Flat",
+            "SteelBox_ExtendIntersection2",
+            "SteelBox_ExtendIntersection1",
+            "SteelBox_MakeHeader",
+            "SteelBox_Laydown",
+            "SteelBox_Raiseup",
+            "SteelBox_Attach2Tube",
+            "SteelBox_Point2Point",
+            "SteelBox_InsertAnyShape",
         ]
         from dodoPM import toolList
 
@@ -139,11 +139,11 @@ class QuetzalWorkbench(Workbench):
         self.appendContextMenu(QT_TRANSLATE_NOOP("Workbench", "Utils"), self.utilsList)
 
     def setWatchers(self):
-        class QuetzalWatcher:
+        class SteelBoxWatcher:
             def __init__(self,commands,title):
                 QT_TRANSLATE_NOOP = FreeCAD.Qt.QT_TRANSLATE_NOOP
                 self.commands = commands
-                self.title = QT_TRANSLATE_NOOP("Quetzal",title)
+                self.title = QT_TRANSLATE_NOOP("SteelBox",title)
 
             def shouldShow(self):
                 result:bool
@@ -179,13 +179,13 @@ class QuetzalWorkbench(Workbench):
                     else:
                         result=False
                 return result
-        self.NoObjects=["Quetzal_HackedLine","Quetzal_Point2Point"]
-        self.WireObjects=["Quetzal_FrameBranchManager","Quetzal_InsertPipe","Quetzal_InsertPypeLine","Quetzal_InsertBranch"]
-        self.TubeObjects=["Quetzal_InsertFlange","Quetzal_InsertTerminalAdapter","Quetzal_InsertElbow"]
+        self.NoObjects=["SteelBox_HackedLine","SteelBox_Point2Point"]
+        self.WireObjects=["SteelBox_FrameBranchManager","SteelBox_InsertPipe","SteelBox_InsertPypeLine","SteelBox_InsertBranch"]
+        self.TubeObjects=["SteelBox_InsertFlange","SteelBox_InsertTerminalAdapter","SteelBox_InsertElbow"]
         FreeCADGui.Control.addTaskWatcher([
-            QuetzalWatcher(self.NoObjects,"No Objects"),
-            QuetzalWatcher(self.WireObjects,"Wire Objects"),
-            QuetzalWatcher(self.TubeObjects,"Tube Objects")])
+            SteelBoxWatcher(self.NoObjects,"No Objects"),
+            SteelBoxWatcher(self.WireObjects,"Wire Objects"),
+            SteelBoxWatcher(self.TubeObjects,"Tube Objects")])
 
     def Activated(self):
         # if hasattr(FreeCADGui, "draftToolBar"):  # patch
@@ -220,4 +220,4 @@ class QuetzalWorkbench(Workbench):
         # Msg("dodo deactivated()\n")
 
 
-FreeCADGui.addWorkbench(QuetzalWorkbench)
+FreeCADGui.addWorkbench(SteelBoxWorkbench)

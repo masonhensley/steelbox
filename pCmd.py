@@ -7,7 +7,7 @@ import Part
 import fCmd
 import pFeatures
 from DraftVecUtils import rounded
-from quetzal_config import get_icon_path
+from steelbox_config import get_icon_path
 
 from math import degrees
 
@@ -135,13 +135,13 @@ class ViewProvider:
     def __init__(self, obj, icon_fn):
         obj.Proxy = self
         self._check_attr()
-        self.icon_fn = get_icon_path(icon_fn or "quetzal")
+        self.icon_fn = get_icon_path(icon_fn or "steelbox")
 
     def _check_attr(self):
         """Check for missing attributes."""
 
         if not hasattr(self, "icon_fn"):
-            setattr(self, "icon_fn", get_icon_path("quetzal"))
+            setattr(self, "icon_fn", get_icon_path("steelbox"))
 
     def getIcon(self):
         """Returns the path to the SVG icon."""
@@ -181,7 +181,7 @@ def makePipe(rating,propList=[], pos=None, Z=None):
         pFeatures.Pipe(a,rating, *propList)
     else:
         pFeatures.Pipe(a,rating)
-    ViewProvider(a.ViewObject, "Quetzal_InsertPipe")
+    ViewProvider(a.ViewObject, "SteelBox_InsertPipe")
     a.Placement.Base = pos
     rot = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), Z)
     a.Placement.Rotation = rot.multiply(a.Placement.Rotation)
@@ -254,7 +254,7 @@ def makeTerminalAdapter(rating,propList=[],pos=None,Z=None):
         Z = FreeCAD.Vector(0, 0, 1)
     a = FreeCAD.ActiveDocument.addObject("Part::FeaturePython", "TerminalAdapter")
     pFeatures.TerminalAdapter(a,rating, *propList)
-    ViewProvider(a.ViewObject, "Quetzal_TerminalAdapter")
+    ViewProvider(a.ViewObject, "SteelBox_TerminalAdapter")
     a.Placement.Base = pos
     rot = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), -Z)
     a.Placement.Rotation = rot.multiply(a.Placement.Rotation)
@@ -283,7 +283,7 @@ def makeElbow(propList=[], pos=None, Z=None):
         pFeatures.Elbow(a, *propList)
     else:
         pFeatures.Elbow(a)
-    ViewProvider(a.ViewObject, "Quetzal_InsertElbow")
+    ViewProvider(a.ViewObject, "SteelBox_InsertElbow")
     a.Placement.Base = pos
     rot = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), Z)
     # rot=FreeCAD.Rotation(FreeCAD.Vector(0,-1,0),Z)
@@ -468,7 +468,7 @@ def makeFlange(propList=[], pos=None, Z=None,doOffset=None):
         pFeatures.Flange(a, *propList)
     else:
         pFeatures.Flange(a)
-    ViewProvider(a.ViewObject, "Quetzal_InsertFlange")
+    ViewProvider(a.ViewObject, "SteelBox_InsertFlange")
     a.Placement.Base = pos
     rot = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), Z)
     a.Placement.Rotation = rot.multiply(a.Placement.Rotation)
@@ -599,7 +599,7 @@ def makeReduct(propList=[], pos=None, Z=None, conc=True):
     a = FreeCAD.ActiveDocument.addObject("Part::FeaturePython", "Reduction")
     propList.append(conc)
     pFeatures.Reduct(a, *propList)
-    ViewProvider(a.ViewObject, "Quetzal_InsertReduct")
+    ViewProvider(a.ViewObject, "SteelBox_InsertReduct")
     a.Placement.Base = pos
     rot = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), Z)
     a.Placement.Rotation = rot.multiply(a.Placement.Rotation)
@@ -629,7 +629,7 @@ def makeUbolt(propList=[], pos=None, Z=None):
         pFeatures.Ubolt(a, *propList)
     else:
         pFeatures.Ubolt(a)
-    ViewProvider(a.ViewObject, "Quetzal_InsertUBolt")
+    ViewProvider(a.ViewObject, "SteelBox_InsertUBolt")
     a.Placement.Base = pos
     rot = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), Z)
     a.Placement.Rotation = rot.multiply(a.Placement.Rotation)
@@ -648,7 +648,7 @@ def makeShell(L=1000, W=1500, H=1500, thk1=6, thk2=8):
     """
     a = FreeCAD.ActiveDocument.addObject("Part::FeaturePython", "Tank")
     pFeatures.Shell(a, L, W, H, thk1, thk2)
-    ViewProvider(a.ViewObject, "Quetzal_InsertTank")
+    ViewProvider(a.ViewObject, "SteelBox_InsertTank")
     a.Placement.Base = FreeCAD.Vector(0, 0, 0)
     a.ViewObject.ShapeColor = 0.0, 0.0, 1.0
     a.ViewObject.Transparency = 85
@@ -678,7 +678,7 @@ def makeCap(propList=[], pos=None, Z=None):
         pFeatures.Cap(a, *propList)
     else:
         pFeatures.Cap(a)
-    ViewProvider(a.ViewObject, "Quetzal_InsertCap")
+    ViewProvider(a.ViewObject, "SteelBox_InsertCap")
     a.Placement.Base = pos
     rot = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), Z)
     a.Placement.Rotation = rot.multiply(a.Placement.Rotation)
@@ -1288,7 +1288,7 @@ def makeValve(propList=[], pos=None, Z=None):
         pFeatures.Valve(a, *propList)
     else:
         pFeatures.Valve(a)
-    ViewProvider(a.ViewObject, "Quetzal_InsertValve")
+    ViewProvider(a.ViewObject, "SteelBox_InsertValve")
     a.Placement.Base = pos
     rot = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), Z)
     a.Placement.Rotation = rot.multiply(a.Placement.Rotation)
