@@ -1,0 +1,30 @@
+{
+  "name": "2.5x2.5x0.25_A36",
+  "description": "2.5x2.5 square tube, 1/4\" wall, A36 steel",
+  "geometry": {
+    "outer_width_mm": 63.5,
+    "outer_height_mm": 63.5,
+    "wall_thickness_mm": 6.35,
+    "corner_radius_mm": 9.525,
+    "inner_corner_radius_mm": 3.175,
+    "dxf_file": "2.5 x 2.5 x 0.25 wall - Square.dxf",
+    "orientation_top_edge": "Y+"
+  },
+  "tolerances": {
+    "slot_clearance_mm": 0.15,
+    "tab_undersize_mm": 0.08,
+    "kerf_compensation_mm": 0.18,
+    "corner_relief_radius_mm": 2.0,
+    "finish_allowance_mm": 0.0
+  },
+  "material": {
+    "grade": "A36",
+    "density_kg_m3": 7850.0
+  },
+  "metadata": {
+    "manufacturer": "",
+    "cutting_process": "Fiber laser",
+    "verified_date": "",
+    "notes": "Heavy duty 2.5x2.5x1/4 square tube. Larger tolerances for thicker material."
+  }
+}

@@ -49,7 +49,13 @@ class SteelBoxWorkbench(Workbench):
         here is the place to import all the commands.
         """
         QT_TRANSLATE_NOOP = FreeCAD.Qt.QT_TRANSLATE_NOOP
-        import CUtils  # noqa: F401
+
+        # Debug: verbose import with error catching
+        try:
+            import CUtils
+            Msg(f"CUtils loaded from: {CUtils.__file__}\n")
+        except Exception as e:
+            FreeCAD.Console.PrintError(f"Failed to import CUtils: {e}\n")
 
         self.utilsList = [
             "SteelBox_SelectSolids",
@@ -64,8 +70,16 @@ class SteelBoxWorkbench(Workbench):
         self.appendToolbar(QT_TRANSLATE_NOOP("Workbench", "Utils"), self.utilsList)
         Log("Loading Utils: done\n")
 
-        import CFrame  # noqa: F401
-        from cut_list.cut_list_commands import cutListCommand  # noqa: F401
+        try:
+            import CFrame
+            Msg(f"CFrame loaded from: {CFrame.__file__}\n")
+        except Exception as e:
+            FreeCAD.Console.PrintError(f"Failed to import CFrame: {e}\n")
+
+        try:
+            from cut_list.cut_list_commands import cutListCommand
+        except Exception as e:
+            FreeCAD.Console.PrintError(f"Failed to import cutListCommand: {e}\n")
 
         self.frameList = [
             "SteelBox_FrameIt",
@@ -88,7 +102,11 @@ class SteelBoxWorkbench(Workbench):
         self.appendToolbar(QT_TRANSLATE_NOOP("Workbench", "Frame tools"), self.frameList)
         Log("Loading Frame tools: done\n")
 
-        import CPipe  # noqa: F401
+        try:
+            import CPipe
+            Msg(f"CPipe loaded from: {CPipe.__file__}\n")
+        except Exception as e:
+            FreeCAD.Console.PrintError(f"Failed to import CPipe: {e}\n")
 
         self.pypeList = [
             "SteelBox_InsertPipe",
@@ -131,6 +149,12 @@ class SteelBoxWorkbench(Workbench):
         self.appendMenu(QT_TRANSLATE_NOOP("Workbench", "Pipe tools"), self.pypeList)
         self.appendMenu(QT_TRANSLATE_NOOP("Workbench", "Utils"), self.utilsList)
         self.appendMenu(QT_TRANSLATE_NOOP("Workbench", "QM Menus"), self.qm)
+
+        # Debug: check how many commands got registered
+        steelbox_cmds = [c for c in FreeCADGui.listCommands() if 'SteelBox' in c]
+        Msg(f"SteelBox commands registered: {len(steelbox_cmds)}\n")
+        if not steelbox_cmds:
+            FreeCAD.Console.PrintWarning("WARNING: No SteelBox commands were registered!\n")
 
     def ContextMenu(self, recipient):
         QT_TRANSLATE_NOOP = FreeCAD.Qt.QT_TRANSLATE_NOOP

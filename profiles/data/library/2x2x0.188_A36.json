@@ -1,0 +1,30 @@
+{
+  "name": "2x2x0.188_A36",
+  "description": "2x2 square tube, 3/16\" wall, A36 steel",
+  "geometry": {
+    "outer_width_mm": 50.8,
+    "outer_height_mm": 50.8,
+    "wall_thickness_mm": 4.775,
+    "corner_radius_mm": 7.15,
+    "inner_corner_radius_mm": 2.38,
+    "dxf_file": "2 x 2 x 0.188 wall - Square.dxf",
+    "orientation_top_edge": "Y+"
+  },
+  "tolerances": {
+    "slot_clearance_mm": 0.12,
+    "tab_undersize_mm": 0.06,
+    "kerf_compensation_mm": 0.15,
+    "corner_relief_radius_mm": 1.5,
+    "finish_allowance_mm": 0.0
+  },
+  "material": {
+    "grade": "A36",
+    "density_kg_m3": 7850.0
+  },
+  "metadata": {
+    "manufacturer": "",
+    "cutting_process": "Fiber laser",
+    "verified_date": "",
+    "notes": "Standard 2x2x3/16 square tube. Thicker wall = slightly larger tolerances."
+  }
+}

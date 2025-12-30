@@ -1,0 +1,34 @@
+{
+  "name": "2x2x0.125_A36_Oshcut",
+  "description": "2x2 square tube, 1/8 wall, A36 steel, cut by Oshcut",
+  
+  "geometry": {
+    "outer_width_mm": 50.8,
+    "outer_height_mm": 50.8,
+    "wall_thickness_mm": 3.175,
+    "corner_radius_mm": 2.5,
+    "dxf_file": "2x2x125_square.dxf",
+    "orientation_top_edge": "Y+"
+  },
+  
+  "tolerances": {
+    "_comment": "Values from Oshcut for THIS specific profile - ask your manufacturer!",
+    "slot_clearance_mm": 0.10,
+    "tab_undersize_mm": 0.05,
+    "kerf_compensation_mm": 0.15,
+    "corner_relief_radius_mm": 1.5,
+    "finish_allowance_mm": 0.0
+  },
+  
+  "material": {
+    "grade": "A36",
+    "density_kg_m3": 7850
+  },
+  
+  "metadata": {
+    "manufacturer": "Oshcut",
+    "cutting_process": "Fiber laser",
+    "verified_date": "2024-01-15",
+    "notes": "Tolerances verified with test fit piece. Tight slip fit."
+  }
+}

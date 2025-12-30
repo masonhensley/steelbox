@@ -1,90 +1,84 @@
-# Quetzal Workbench
+# SteelBox Workbench
 
-[![Contributions welcome][ContribsW_badge]][CONTRIBUTING]
-[![license][license_badge]][LICENSE]
-[![FreeCAD Addon Manager][AddonMgr_badge]][AddonMgr]
-[![pre-commit enabled][pre-commit_badge]][pre-commit]
-[![Code style: black][black_badge]][black]
-[![GitHub Tag][tag_bagde]][tag]
-[![Common Changelog][cc_badge]][CHANGELOG]
+A [FreeCAD](https://freecad.org) workbench for designing parametric tube steel cabinet frames with self-fixturing tab/slot joinery.
 
-Quetzal is the fork of Dodo workbench for [FreeCAD](https://freecad.org).
-Extending Dodo workbench support & adding translation support.
-![screenshot1](https://github.com/user-attachments/assets/70e96920-34db-40d9-a8d6-102e690a13ee "Metal frame created with Quetzal")
-![Piping example](https://github.com/user-attachments/assets/0631e4df-e733-403d-8949-fb6a21e2742d)
+SteelBox is a fork of [Quetzal](https://github.com/EdgarJRobles/quetzal) (itself a fork of Dodo), extended with features for laser-cut equipment enclosure design.
 
+## Features
 
+### Core Capabilities (from Quetzal/Dodo)
+- Frame and beam structure creation
+- Pipe routing and fittings
+- Cut list generation for BOM
+
+### SteelBox Additions
+- **Parametric Box Generator** - Spreadsheet-driven cabinet dimensions
+- **Tab/Slot Joinery System** - Self-fixturing joints for easy welding without jigs
+- **Tube Profile Management** - DXF import with manufacturer-specific tolerances
+- **Corner Relief Options** - Dogbone or radius relief for laser cutting
 
 ## Installation
 
-### Automatic Installation
+### Manual Installation
 
-The recommended way to install Quetzal is via FreeCAD's
-[Addon Manager](https://wiki.freecad.org/Std_AddonMgr) under
-`Tools > Addon Manager` drop-down menu.
-
-Search for **Quetzal** in the workbench category.
-
-### Manual installation
-
-The install path for FreeCAD modules depends on the operating system used.
-
-To find where is the user's application data directory enter next command on
-FreeCAD's Python console.
+Find your FreeCAD modules directory:
 
 ```python
+# Run in FreeCAD Python console
 App.getUserAppDataDir()
 ```
 
-Examples on different OS
-
+Common locations:
 - Linux: `/home/user/.local/share/FreeCAD/Mod/`
 - macOS: `/Users/user/Library/Preferences/FreeCAD/Mod/`
 - Windows: `C:\Users\user\AppData\Roaming\FreeCAD\Mod\`
 
-Use the CLI to enter the `Mod` directory and use Git to install Quetzal:
+Clone the repository:
 
 ```shell
-git clone https://github.com/EdgarJRobles/quetzal Quetzal
+cd /path/to/FreeCAD/Mod/
+git clone https://github.com/gwaihir-io/steelbox SteelBox
 ```
 
-If you are updating the code, restarting FreeCAD is advised.
+Restart FreeCAD after installation.
 
-## Usage
+## Quick Start
 
-Check the documentation on the FreeCAD Wiki article:
-<https://wiki.freecad.org/Dodo_Workbench>
+Generate a basic cabinet frame in FreeCAD's Python console:
 
-Discussion in the FreeCAD Forum:
-<https://forum.freecad.org/viewtopic.php?t=22711>
+```python
+import sys
+sys.path.insert(0, '/path/to/steelbox')
 
-## Changelog
+from core import create_jointed_box_frame, BoxSpecsData
 
-Read our [CHANGELOG] file to know about the latest changes.
+doc = App.newDocument("Cabinet")
+specs = BoxSpecsData(
+    length_mm=1500,
+    height_mm=800,
+    depth_mm=600,
+    foot_height_mm=100,
+)
+parts, generator = create_jointed_box_frame(doc, specs)
+```
 
-## Contributing
+## Requirements
 
-Read our [CONTRIBUTING] file to know about ways how to help on the workbench.
+- FreeCAD 1.0+
+- Python 3.10+
 
-## Links
+## Documentation
 
-- [FreeCAD Site main page](https://www.freecad.org/)
+See `CLAUDE.md` for detailed architecture and implementation notes.
 
-- [FreeCAD Wiki main page](https://www.freecad.org/wiki)
+Original Dodo/Quetzal documentation: https://wiki.freecad.org/Dodo_Workbench
 
-- [FreeCAD Repository](https://github.com/FreeCAD/FreeCAD)
+## License
 
-[CONTRIBUTING]: ./CONTRIBUTING.md
-[ContribsW_badge]: <https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat>
-[LICENSE]: ./LICENSE
-[license_badge]: <https://img.shields.io/github/license/EdgarJRobles/quetzal>
-[AddonMgr]: <https://github.com/FreeCAD/FreeCAD-addons>
-[AddonMgr_badge]: <https://img.shields.io/badge/FreeCAD%20addon%20manager-available-brightgreen>
-[pre-commit]: <https://github.com/pre-commit/pre-commit>
-[pre-commit_badge]: <https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit>
-[black]: <https://github.com/psf/black>
-[black_badge]: <https://img.shields.io/badge/code%20style-black-000000.svg>
-[tag]: <https://github.com/EdgarJRobles/quetzal/releases>
-[tag_bagde]: <https://img.shields.io/github/v/tag/EdgarJRobles/quetzal>
-[cc_badge]: <https://common-changelog.org/badge.svg>
-[CHANGELOG]: ./CHANGELOG.md
+LGPL-3.0-or-later (inherited from Quetzal/Dodo)
+
+## Credits
+
+- Original Dodo workbench by [@oddtopus](https://github.com/oddtopus)
+- Quetzal fork by [@EdgarJRobles](https://github.com/EdgarJRobles)
+- SteelBox extensions by Gwaihir
