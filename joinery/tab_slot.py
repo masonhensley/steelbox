@@ -88,7 +88,7 @@ class TabSlotGenerator:
     def __init__(
         self,
         profile: TubeProfile,
-        tab_depth_ratio: float = 0.6,
+        tab_depth_mm: float = 10.0,
         relief_type: CornerReliefType = CornerReliefType.RADIUS,
     ):
         """
@@ -96,11 +96,11 @@ class TabSlotGenerator:
 
         Args:
             profile: Tube profile with tolerance values.
-            tab_depth_ratio: Tab depth as fraction of mating member depth (0.5-0.75).
+            tab_depth_mm: Fixed tab depth in mm (default 10mm).
             relief_type: Type of corner relief for slots.
         """
         self.profile = profile
-        self.tab_depth_ratio = tab_depth_ratio
+        self.tab_depth_mm = tab_depth_mm
         self.relief_type = relief_type
 
         # Cache computed dimensions
@@ -121,6 +121,9 @@ class TabSlotGenerator:
         """
         Calculate tab geometry for a joint.
 
+        Tabs are placed on FLAT faces (top/bottom) of tubes, NOT on curved sides.
+        For square tubes, this means the faces perpendicular to the "up" direction.
+
         Args:
             joint: Joint where tab will be placed.
             face: Which face of the tube to place tab on.
@@ -132,61 +135,63 @@ class TabSlotGenerator:
         tab_member = joint.member_b
         slot_member = joint.member_a
 
-        # Tab depth based on mating member depth
-        mating_depth = slot_member.width  # Tube width of receiving member
-        tab_depth = mating_depth * self.tab_depth_ratio
+        # Use fixed tab depth from generator settings
+        tab_depth = self.tab_depth_mm
 
         # Tab position at end of tab member
         if joint.param_b > 0.5:
-            # Tab at end of member
             base_pos = tab_member.end
         else:
-            # Tab at start of member
             base_pos = tab_member.start
 
-        # Direction from tab member toward slot member
-        # This is perpendicular to the tab member axis
         tab_dir = tab_member.direction
         slot_dir = slot_member.direction
 
-        # Tab extends perpendicular to its own member, toward the slot
-        # Calculate the direction from tab base to slot centerline
-        dx = joint.intersection_point[0] - base_pos[0]
-        dy = joint.intersection_point[1] - base_pos[1]
-        dz = joint.intersection_point[2] - base_pos[2]
+        # Determine the direction the tab extends (toward receiving member)
+        # This should be perpendicular to both the tab member axis and the tab face normal
+        # For proper joinery, tabs extend from the member END toward the receiving member
+
+        # Calculate direction from tab base toward the slot member's centerline
+        slot_center = slot_member.point_at_param(joint.param_a)
+        dx = slot_center[0] - base_pos[0]
+        dy = slot_center[1] - base_pos[1]
+        dz = slot_center[2] - base_pos[2]
         dist = math.sqrt(dx*dx + dy*dy + dz*dz)
 
         if dist > 1e-6:
             extend_dir = (dx/dist, dy/dist, dz/dist)
         else:
-            # Default to slot member direction if at same point
             extend_dir = slot_dir
 
-        # Tab normal is along tab member axis
-        normal = tab_dir
+        # CRITICAL: Tab faces should be on FLAT faces (top/bottom), not curved sides
+        # For a tube, "flat" faces are perpendicular to the secondary axis:
+        # - Vertical tube (along Z): flat faces are perpendicular to Y (front/back)
+        # - Horizontal tube along X: flat faces are perpendicular to Z (top/bottom)
+        # - Horizontal tube along Y: flat faces are perpendicular to Z (top/bottom)
 
-        # Adjust position based on face
-        # Tab center offset from tube centerline
-        offset = self.tube_width / 2 - self.wall_thickness / 2
-
-        if face == TabPosition.TOP:
-            # Offset in +Z (or +Y for horizontal members)
-            if abs(tab_dir[2]) > 0.9:  # Vertical member
-                pos_offset = (0, offset, 0)
+        # Determine tab face normal (perpendicular to tube axis AND extend direction)
+        # This ensures tab is on a flat face
+        if abs(tab_dir[2]) > 0.9:  # Vertical member (along Z)
+            # Tab extends horizontally, tab face normal should be horizontal too
+            # Use the perpendicular to extend_dir in XY plane
+            if abs(extend_dir[0]) > abs(extend_dir[1]):
+                # Extending mainly in X, tab face normal in Y
+                face_normal = (0, 1, 0) if face == TabPosition.TOP else (0, -1, 0)
             else:
-                pos_offset = (0, 0, offset)
-        elif face == TabPosition.BOTTOM:
-            if abs(tab_dir[2]) > 0.9:
-                pos_offset = (0, -offset, 0)
-            else:
-                pos_offset = (0, 0, -offset)
+                # Extending mainly in Y, tab face normal in X
+                face_normal = (1, 0, 0) if face == TabPosition.TOP else (-1, 0, 0)
         else:
-            pos_offset = (0, 0, 0)
+            # Horizontal member - tab face normal should be in Z (top/bottom)
+            face_normal = (0, 0, 1) if face == TabPosition.TOP else (0, 0, -1)
+
+        # Tab position: offset from tube centerline to the face
+        # The offset moves the tab to the outer surface of the tube wall
+        face_offset = self.tube_height / 2 - self.wall_thickness / 2
 
         position = (
-            base_pos[0] + pos_offset[0],
-            base_pos[1] + pos_offset[1],
-            base_pos[2] + pos_offset[2],
+            base_pos[0] + face_normal[0] * face_offset,
+            base_pos[1] + face_normal[1] * face_offset,
+            base_pos[2] + face_normal[2] * face_offset,
         )
 
         return TabGeometry(
@@ -195,7 +200,7 @@ class TabSlotGenerator:
             thickness=self.wall_thickness,
             position=position,
             direction=extend_dir,
-            normal=normal,
+            normal=face_normal,
             corner_radius=self.relief_radius if self.relief_type == CornerReliefType.RADIUS else 0,
         )
 
@@ -207,6 +212,9 @@ class TabSlotGenerator:
         """
         Calculate slot geometry for a joint.
 
+        Slots are cut into FLAT faces (top/bottom) of the receiving tube.
+        The slot receives the tab from the joining member.
+
         Args:
             joint: Joint where slot will be cut.
             face: Which face of the tube to cut slot in.
@@ -217,42 +225,71 @@ class TabSlotGenerator:
         slot_member = joint.member_a
         tab_member = joint.member_b
 
-        # Slot depth - goes through tube wall
-        slot_depth = self.wall_thickness * 1.5  # Extra depth for clean cut
+        # Slot depth - goes through tube wall plus extra for clean cut
+        slot_depth = self.wall_thickness * 2.0
 
-        # Slot length matches tab depth
-        mating_depth = tab_member.width
-        slot_length = mating_depth * self.tab_depth_ratio + self.relief_radius * 2
+        # Slot length matches tab depth plus relief for clearance
+        slot_length = self.tab_depth_mm + self.relief_radius * 2
 
-        # Slot position on slot member at intersection
+        # Slot position: on the slot member at the intersection point
         position = slot_member.point_at_param(joint.param_a)
 
-        # Slot direction goes into the tube (perpendicular to surface)
-        slot_dir = slot_member.direction
-
-        # Slot "along" direction - perpendicular to slot_dir and member axis
-        # This is the direction the slot extends along the tube face
         member_dir = slot_member.direction
 
-        # For a tube along X, slots on top face extend into -Z, along Y
-        # For a tube along Y, slots on top face extend into -Z, along X
-        # For a tube along Z, slots on top face extend into -Y, along X
+        # Determine where the tab is coming FROM to know which face to cut
+        # The slot should be on the face that the tab member approaches
+        tab_base = tab_member.end if joint.param_b > 0.5 else tab_member.start
+        approach_dx = position[0] - tab_base[0]
+        approach_dy = position[1] - tab_base[1]
+        approach_dz = position[2] - tab_base[2]
 
-        if abs(member_dir[2]) > 0.9:  # Vertical
-            slot_into = (0, -1, 0) if face == TabPosition.TOP else (0, 1, 0)
+        # SLOT FACE LOGIC:
+        # The slot is cut on the face of the receiving member that faces the tab member
+        # For FLAT faces only (top/bottom):
+        # - Horizontal member along X: top/bottom faces are Z faces
+        # - Horizontal member along Y: top/bottom faces are Z faces
+        # - Vertical member along Z: "top/bottom" are Y faces (front/back)
+
+        if abs(member_dir[2]) > 0.9:  # Vertical slot member
+            # Slot is on Y face (front or back)
+            if approach_dy > 0:
+                slot_into = (0, 1, 0)   # Tab coming from front, slot on front face
+            else:
+                slot_into = (0, -1, 0)  # Tab coming from back, slot on back face
+            # Slot extends along X
             along = (1, 0, 0)
-        elif abs(member_dir[0]) > 0.9:  # Along X
-            slot_into = (0, 0, -1) if face == TabPosition.TOP else (0, 0, 1)
+
+        elif abs(member_dir[0]) > 0.9:  # Horizontal along X
+            # Slot is on Z face (top or bottom)
+            if approach_dz > 0:
+                slot_into = (0, 0, 1)   # Tab coming from above, slot on top
+            else:
+                slot_into = (0, 0, -1)  # Tab coming from below, slot on bottom
+            # Slot extends along Y
             along = (0, 1, 0)
-        else:  # Along Y
-            slot_into = (0, 0, -1) if face == TabPosition.TOP else (0, 0, 1)
+
+        else:  # Horizontal along Y (depth rails)
+            # Slot is on Z face (top or bottom)
+            if approach_dz > 0:
+                slot_into = (0, 0, 1)
+            else:
+                slot_into = (0, 0, -1)
+            # Slot extends along X
             along = (1, 0, 0)
+
+        # Offset position to the face surface
+        face_offset = self.tube_height / 2
+        slot_position = (
+            position[0] + slot_into[0] * face_offset,
+            position[1] + slot_into[1] * face_offset,
+            position[2] + slot_into[2] * face_offset,
+        )
 
         return SlotGeometry(
             width=self.slot_width,
             depth=slot_depth,
             length=slot_length,
-            position=position,
+            position=slot_position,
             direction=slot_into,
             along=along,
             relief_type=self.relief_type,

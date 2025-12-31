@@ -53,7 +53,8 @@ class BoxSpecsData:
     # Tab/slot settings
     tabs_enabled: bool = True
     caps_enabled: bool = True
-    tab_depth_ratio: float = 0.6  # Tab depth as fraction of mating depth
+    tab_depth_mm: float = 10.0    # Fixed tab depth in mm (10mm default)
+    tab_depth_ratio: float = 1.0  # Multiplier for tab_depth_mm (1.0 = use tab_depth_mm as-is)
 
     # Panel settings
     panel_thickness_sides_mm: float = 1.5   # 16ga
