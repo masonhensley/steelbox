@@ -452,25 +452,33 @@ class TabSlotGenerator:
     def generate_joint_features(
         self,
         joint: Joint,
-    ) -> Tuple[Optional[TabGeometry], Optional[SlotGeometry]]:
+    ) -> Tuple[List[TabGeometry], List[SlotGeometry]]:
         """
         Generate tab and slot geometry for a joint.
+
+        Creates 2 tabs and 2 slots per joint - one on each flat face (top and bottom).
 
         Args:
             joint: Joint to generate features for.
 
         Returns:
-            Tuple of (TabGeometry, SlotGeometry) or (None, None) if not applicable.
+            Tuple of (list of TabGeometry, list of SlotGeometry).
         """
         if joint.joint_type == JointType.INLINE:
             # No tab/slot for inline joints
-            return (None, None)
+            return ([], [])
 
-        # Generate both tab and slot
-        tab = self.calc_tab_geometry(joint, joint.tab_face)
-        slot = self.calc_slot_geometry(joint, joint.slot_face)
+        tabs = []
+        slots = []
 
-        return (tab, slot)
+        # Generate tabs and slots for BOTH top and bottom faces
+        for face in [TabPosition.TOP, TabPosition.BOTTOM]:
+            tab = self.calc_tab_geometry(joint, face)
+            slot = self.calc_slot_geometry(joint, face)
+            tabs.append(tab)
+            slots.append(slot)
+
+        return (tabs, slots)
 
 
 def apply_slots_to_member(

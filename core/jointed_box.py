@@ -195,14 +195,16 @@ class JointedBoxGenerator:
             if joint.joint_type == JointType.INLINE:
                 continue
 
-            # Generate tab and slot
-            tab, slot = self.tab_slot_gen.generate_joint_features(joint)
+            # Generate tabs and slots (now returns lists - 2 per joint)
+            tabs, slots = self.tab_slot_gen.generate_joint_features(joint)
 
-            if tab and joint.member_b.member_id in self.jointed_members:
-                self.jointed_members[joint.member_b.member_id].tabs.append(tab)
+            # Add all tabs to the tab member
+            if joint.member_b.member_id in self.jointed_members:
+                self.jointed_members[joint.member_b.member_id].tabs.extend(tabs)
 
-            if slot and joint.member_a.member_id in self.jointed_members:
-                self.jointed_members[joint.member_a.member_id].slots.append(slot)
+            # Add all slots to the slot member
+            if joint.member_a.member_id in self.jointed_members:
+                self.jointed_members[joint.member_a.member_id].slots.extend(slots)
 
     def check_interference(self) -> List:
         """

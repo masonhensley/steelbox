@@ -54,7 +54,7 @@ class BoxSpecsData:
     tabs_enabled: bool = True
     caps_enabled: bool = True
     tab_depth_mm: float = 10.0    # Fixed tab depth in mm (10mm default)
-    tab_width_mm: float = 3.0     # Fixed tab width in mm (3mm default)
+    tab_width_mm: float = 15.0    # Fixed tab width in mm (15mm default)
     tab_depth_ratio: float = 1.0  # Multiplier for tab_depth_mm (1.0 = use as-is)
 
     # Panel settings
