@@ -89,6 +89,7 @@ class TabSlotGenerator:
         self,
         profile: TubeProfile,
         tab_depth_mm: float = 10.0,
+        tab_width_mm: float = 3.0,
         relief_type: CornerReliefType = CornerReliefType.RADIUS,
     ):
         """
@@ -97,6 +98,7 @@ class TabSlotGenerator:
         Args:
             profile: Tube profile with tolerance values.
             tab_depth_mm: Fixed tab depth in mm (default 10mm).
+            tab_width_mm: Fixed tab width in mm (default 3mm).
             relief_type: Type of corner relief for slots.
         """
         self.profile = profile
@@ -108,9 +110,9 @@ class TabSlotGenerator:
         self.tube_width = profile.geometry.outer_width_mm
         self.tube_height = profile.geometry.outer_height_mm
 
-        # Tab/slot dimensions from tolerances
-        self.tab_width = profile.calc_tab_width()
-        self.slot_width = profile.calc_slot_width()
+        # Tab/slot dimensions - use fixed width, slot slightly larger
+        self.tab_width = tab_width_mm
+        self.slot_width = tab_width_mm + profile.tolerances.slot_clearance_mm
         self.relief_radius = profile.tolerances.corner_relief_radius_mm
 
     def calc_tab_geometry(
@@ -231,58 +233,84 @@ class TabSlotGenerator:
         # Slot length matches tab depth plus relief for clearance
         slot_length = self.tab_depth_mm + self.relief_radius * 2
 
-        # Slot position: on the slot member at the intersection point
-        position = slot_member.point_at_param(joint.param_a)
-
         member_dir = slot_member.direction
+        tab_dir = tab_member.direction
 
-        # Determine where the tab is coming FROM to know which face to cut
-        # The slot should be on the face that the tab member approaches
+        # Find the tab position (where it connects to the slot member)
         tab_base = tab_member.end if joint.param_b > 0.5 else tab_member.start
-        approach_dx = position[0] - tab_base[0]
-        approach_dy = position[1] - tab_base[1]
-        approach_dz = position[2] - tab_base[2]
 
-        # SLOT FACE LOGIC:
-        # The slot is cut on the face of the receiving member that faces the tab member
-        # For FLAT faces only (top/bottom):
-        # - Horizontal member along X: top/bottom faces are Z faces
-        # - Horizontal member along Y: top/bottom faces are Z faces
-        # - Vertical member along Z: "top/bottom" are Y faces (front/back)
+        # The slot needs to be positioned where the tab ENTERS the slot member
+        # This is at the tab_base position, projected onto the slot member's face
 
-        if abs(member_dir[2]) > 0.9:  # Vertical slot member
-            # Slot is on Y face (front or back)
-            if approach_dy > 0:
-                slot_into = (0, 1, 0)   # Tab coming from front, slot on front face
+        # Determine which face of the slot member the tab enters
+        # For a horizontal member (along X or Y), tabs enter from Z direction (top/bottom)
+        # For a vertical member (along Z), tabs enter from X or Y direction
+
+        if abs(member_dir[2]) > 0.9:  # Vertical slot member (along Z)
+            # Tab enters from X or Y direction
+            # Determine which side based on tab position relative to slot member
+            slot_center = slot_member.point_at_param(joint.param_a)
+            if abs(tab_base[0] - slot_center[0]) > abs(tab_base[1] - slot_center[1]):
+                # Tab approaches from X direction
+                if tab_base[0] > slot_center[0]:
+                    slot_into = (-1, 0, 0)  # Tab from +X, slot on +X face, cuts into -X
+                else:
+                    slot_into = (1, 0, 0)   # Tab from -X, slot on -X face, cuts into +X
+                along = (0, 0, 1)  # Slot extends along Z (member axis)
             else:
-                slot_into = (0, -1, 0)  # Tab coming from back, slot on back face
-            # Slot extends along X
-            along = (1, 0, 0)
+                # Tab approaches from Y direction
+                if tab_base[1] > slot_center[1]:
+                    slot_into = (0, -1, 0)
+                else:
+                    slot_into = (0, 1, 0)
+                along = (0, 0, 1)
 
         elif abs(member_dir[0]) > 0.9:  # Horizontal along X
-            # Slot is on Z face (top or bottom)
-            if approach_dz > 0:
-                slot_into = (0, 0, 1)   # Tab coming from above, slot on top
+            # Tab enters from Y or Z direction
+            slot_center = slot_member.point_at_param(joint.param_a)
+            if abs(tab_base[2] - slot_center[2]) > abs(tab_base[1] - slot_center[1]):
+                # Tab approaches from Z direction (top/bottom)
+                if tab_base[2] > slot_center[2]:
+                    slot_into = (0, 0, -1)  # Tab from above, cuts down
+                else:
+                    slot_into = (0, 0, 1)   # Tab from below, cuts up
+                along = (1, 0, 0)  # Slot extends along X (member axis)
             else:
-                slot_into = (0, 0, -1)  # Tab coming from below, slot on bottom
-            # Slot extends along Y
-            along = (0, 1, 0)
+                # Tab approaches from Y direction
+                if tab_base[1] > slot_center[1]:
+                    slot_into = (0, -1, 0)
+                else:
+                    slot_into = (0, 1, 0)
+                along = (1, 0, 0)
 
         else:  # Horizontal along Y (depth rails)
-            # Slot is on Z face (top or bottom)
-            if approach_dz > 0:
-                slot_into = (0, 0, 1)
+            # Tab enters from X or Z direction
+            slot_center = slot_member.point_at_param(joint.param_a)
+            if abs(tab_base[2] - slot_center[2]) > abs(tab_base[0] - slot_center[0]):
+                # Tab approaches from Z direction
+                if tab_base[2] > slot_center[2]:
+                    slot_into = (0, 0, -1)
+                else:
+                    slot_into = (0, 0, 1)
+                along = (0, 1, 0)  # Slot extends along Y (member axis)
             else:
-                slot_into = (0, 0, -1)
-            # Slot extends along X
-            along = (1, 0, 0)
+                # Tab approaches from X direction
+                if tab_base[0] > slot_center[0]:
+                    slot_into = (-1, 0, 0)
+                else:
+                    slot_into = (1, 0, 0)
+                along = (0, 1, 0)
 
-        # Offset position to the face surface
+        # Slot position: at the intersection point, on the face surface
+        # The face is at tube_height/2 from centerline in the slot_into direction (opposite)
+        slot_center = slot_member.point_at_param(joint.param_a)
+        face_normal = (-slot_into[0], -slot_into[1], -slot_into[2])  # Outward from face
         face_offset = self.tube_height / 2
+
         slot_position = (
-            position[0] + slot_into[0] * face_offset,
-            position[1] + slot_into[1] * face_offset,
-            position[2] + slot_into[2] * face_offset,
+            slot_center[0] + face_normal[0] * face_offset,
+            slot_center[1] + face_normal[1] * face_offset,
+            slot_center[2] + face_normal[2] * face_offset,
         )
 
         return SlotGeometry(

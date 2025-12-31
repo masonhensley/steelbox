@@ -166,10 +166,16 @@ def create_tube_face(
     outer_wire = create_tube_wire(geometry, center, is_outer=True)
     inner_wire = create_tube_wire(geometry, center, is_outer=False)
 
-    # Create face from outer wire with inner wire as hole
-    face = Part.Face([outer_wire, inner_wire])
+    # Create outer face
+    outer_face = Part.Face(outer_wire)
 
-    return face
+    # Create inner face (hole)
+    inner_face = Part.Face(inner_wire)
+
+    # Cut the inner from outer to create hollow profile
+    hollow_face = outer_face.cut(inner_face)
+
+    return hollow_face
 
 
 def create_tube_solid(
@@ -180,20 +186,34 @@ def create_tube_solid(
     """
     Create a Part.Shape (solid) by extruding the tube profile.
 
+    Creates a HOLLOW tube by extruding outer profile and subtracting inner.
+
     Args:
         profile: TubeProfile to extrude.
         length_mm: Extrusion length in mm.
         center: Center point for profile.
 
     Returns:
-        Part.Shape (solid tube).
+        Part.Shape (hollow solid tube).
     """
     _check_freecad()
 
-    face = create_tube_face(profile.geometry, center)
-    solid = face.extrude(Vector(0, 0, length_mm))
+    # Create outer and inner wires
+    outer_wire = create_tube_wire(profile.geometry, center, is_outer=True)
+    inner_wire = create_tube_wire(profile.geometry, center, is_outer=False)
 
-    return solid
+    # Create outer solid
+    outer_face = Part.Face(outer_wire)
+    outer_solid = outer_face.extrude(Vector(0, 0, length_mm))
+
+    # Create inner solid (the hollow part)
+    inner_face = Part.Face(inner_wire)
+    inner_solid = inner_face.extrude(Vector(0, 0, length_mm))
+
+    # Subtract inner from outer to create hollow tube
+    hollow_tube = outer_solid.cut(inner_solid)
+
+    return hollow_tube
 
 
 def create_profile_sketch(

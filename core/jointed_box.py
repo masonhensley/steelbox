@@ -103,6 +103,7 @@ class JointedBoxGenerator:
         self.tab_slot_gen = TabSlotGenerator(
             profile,
             tab_depth_mm=specs.tab_depth_mm * specs.tab_depth_ratio,
+            tab_width_mm=specs.tab_width_mm,
             relief_type=relief_type,
         )
         self.interference_checker = InterferenceChecker()
